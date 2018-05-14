@@ -40,7 +40,7 @@ font {
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8"
-				style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
+				style="background: #fff; padding: 40px 80px; margin:30px; border: 7px solid #ccc;">
 				<font>会员注册</font>USER REGISTER
 				<form class="form-horizontal" action="${pageContext.request.contextPath}/register" method="post" style="margin-top: 5px;">
 					<div class="form-group">
