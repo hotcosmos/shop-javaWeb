@@ -42,18 +42,18 @@ font {
 			<div class="col-md-8"
 				style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
 				<font>会员注册</font>USER REGISTER
-				<form class="form-horizontal" style="margin-top: 5px;">
+				<form class="form-horizontal" action="${pageContext.request.contextPath}/register" method="post" style="margin-top: 5px;">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="username"
+							<input type="text" class="form-control" id="username" name="username"
 								placeholder="请输入用户名">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
 						<div class="col-sm-6">
-							<input type="password" class="form-control" id="inputPassword3"
+							<input type="password" class="form-control" id="inputPassword3" name="password"
 								placeholder="请输入密码">
 						</div>
 					</div>
@@ -67,14 +67,14 @@ font {
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 						<div class="col-sm-6">
-							<input type="email" class="form-control" id="inputEmail3"
+							<input type="email" class="form-control" id="inputEmail3" name="email"
 								placeholder="Email">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="usercaption" class="col-sm-2 control-label">姓名</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="usercaption"
+							<input type="text" class="form-control" id="usercaption" name="name"
 								placeholder="请输入姓名">
 						</div>
 					</div>
@@ -82,10 +82,10 @@ font {
 						<label for="inlineRadio1" class="col-sm-2 control-label">性别</label>
 						<div class="col-sm-6">
 							<label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio1" value="option1">
+								name="sex" id="inlineRadio1" value="male">
 								男
 							</label> <label class="radio-inline"> <input type="radio"
-								name="inlineRadioOptions" id="inlineRadio2" value="option2">
+								name="sex" id="inlineRadio2" value="female">
 								女
 							</label>
 						</div>
@@ -93,14 +93,14 @@ font {
 					<div class="form-group">
 						<label for="date" class="col-sm-2 control-label">出生日期</label>
 						<div class="col-sm-6">
-							<input type="date" class="form-control">
+							<input type="date" name="birthday" class="form-control">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="date" class="col-sm-2 control-label">验证码</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control">
+							<input type="text" name="checkCode" class="form-control">
 
 						</div>
 						<div class="col-sm-2">
