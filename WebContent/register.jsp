@@ -7,6 +7,8 @@
 <title>会员注册</title>
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<!-- 引入表单校验插件 -->
+<script src="js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <!-- 引入自定义css文件 style.css -->
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -28,7 +30,66 @@ font {
 	font-weight: normal;
 	padding: 0 10px;
 }
+.error{
+	color:#ee4444;
+}
 </style>
+<script type="text/javascript">
+	$(function(){
+		$("#myform").validate({
+			rules:{
+				"username":{
+					"required":true
+				},
+				"password":{
+					"required":true,
+					"rangelength":[6,18]
+				},
+				"confirmpwd":{
+					"required":true,
+					"rangelength":[6,18],
+					"equalTo":"#password"
+				},
+				"email":{
+					"required":true,
+					"email":true
+				},
+				"sex":{
+					"required":true
+				},
+				"birthday":{
+					"required":true,
+					"date":true
+				}
+			},
+			messages:{
+				"username":{
+					"required":"用户名不能为空"
+				},
+				"password":{
+					"required":"密码不能为空",
+					"rangelength":"密码必须为6-18位"
+				},
+				"confirmpwd":{
+					"required":"确认密码不能为空",
+					"rangelength":"确认密码必须6-18位",
+					"equalTo":"密码和确认密码不一致"
+				},
+				"email":{
+					"required":"邮箱不能为空",
+					"email":"邮箱格式不正确"
+				},
+				"sex":{
+					"required":"请选择性别"
+				},
+				"birthday":{
+					"required":"请选择出生日期",
+					"date":"日期格式不正确"
+				}
+			}
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -42,7 +103,7 @@ font {
 			<div class="col-md-8"
 				style="background: #fff; padding: 40px 80px; margin:30px; border: 7px solid #ccc;">
 				<font>会员注册</font>USER REGISTER
-				<form class="form-horizontal" action="${pageContext.request.contextPath}/register" method="post" style="margin-top: 5px;">
+				<form class="form-horizontal" id="myform" action="${pageContext.request.contextPath}/register" method="post" style="margin-top: 5px;">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-6">
@@ -53,14 +114,14 @@ font {
 					<div class="form-group">
 						<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
 						<div class="col-sm-6">
-							<input type="password" class="form-control" id="inputPassword3" name="password"
+							<input type="password" class="form-control" id="password" name="password"
 								placeholder="请输入密码">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="confirmpwd" class="col-sm-2 control-label">确认密码</label>
 						<div class="col-sm-6">
-							<input type="password" class="form-control" id="confirmpwd"
+							<input type="password" class="form-control" id="confirmpwd" name="confirmpwd"
 								placeholder="请输入确认密码">
 						</div>
 					</div>
@@ -88,6 +149,7 @@ font {
 								name="sex" id="inlineRadio2" value="female">
 								女
 							</label>
+							<label class="error" for="sex" generated="true"></label>
 						</div>
 					</div>
 					<div class="form-group">
