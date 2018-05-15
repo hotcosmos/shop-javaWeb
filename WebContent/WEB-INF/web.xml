@@ -19,4 +19,14 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActiveServlet</display-name>
+    <servlet-name>ActiveServlet</servlet-name>
+    <servlet-class>com.hotcosmos.web.servlet.ActiveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActiveServlet</servlet-name>
+    <url-pattern>/active</url-pattern>
+  </servlet-mapping>
 </web-app>
