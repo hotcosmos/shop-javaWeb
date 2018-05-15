@@ -1,5 +1,7 @@
 package com.hotcosmos.service;
 
+import java.sql.SQLException;
+
 import com.hotcosmos.dao.UserDao;
 import com.hotcosmos.domain.User;
 
@@ -21,6 +23,22 @@ public class UserService {
 	public void actice(String activeCode) {
 		UserDao userdao = new UserDao();
 		userdao.active(activeCode);
+	}
+	/**
+	 * 这是用来ajax异步判断表单提交的用户名或邮箱是否存在的方法
+	 * @param field  判断的是哪个字段（用户名或邮箱）
+	 * @param isExistValue  判断的值
+	 * @return
+	 */
+	public boolean isExistField(String field, String isExistValue) {
+		UserDao userdao = new UserDao();
+		Long row = 0L;
+		try {
+			row = userdao.isExistField(field,isExistValue);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return row>0?true:false;
 	}
 
 }

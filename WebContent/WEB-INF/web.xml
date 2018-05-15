@@ -29,4 +29,14 @@
     <servlet-name>ActiveServlet</servlet-name>
     <url-pattern>/active</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IsExistFieldServlet</display-name>
+    <servlet-name>IsExistFieldServlet</servlet-name>
+    <servlet-class>com.hotcosmos.web.servlet.IsExistFieldServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IsExistFieldServlet</servlet-name>
+    <url-pattern>/isExistField</url-pattern>
+  </servlet-mapping>
 </web-app>

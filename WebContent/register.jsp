@@ -35,11 +35,36 @@ font {
 }
 </style>
 <script type="text/javascript">
+	//自定义validate校验规则，校验用户名和邮箱是否存在
+	$.validator.addMethod(
+		//参数一 ：规则名称
+		"isExistField",
+		//参数二 : 校验的函数
+		function(value,element,params){
+			var flag = true;
+			$.ajax({
+				"async":false,
+				"url":"${pageContext.request.contextPath}/isExistField",
+				"data":{"isExistField":params,"isExistValue":value},
+				"type":"POST",
+				"dataType":"json",
+				"success":function(data){
+					flag = data.isExist;
+				}
+			});
+			//返回false表示此校验不通过
+			return !flag;
+		}
+	);
+	
+	
+	//使用validate进行表单校验
 	$(function(){
 		$("#myform").validate({
 			rules:{
 				"username":{
-					"required":true
+					"required":true,
+					"isExistField":"username"
 				},
 				"password":{
 					"required":true,
@@ -52,7 +77,8 @@ font {
 				},
 				"email":{
 					"required":true,
-					"email":true
+					"email":true,
+					"isExistField":"email"
 				},
 				"sex":{
 					"required":true
@@ -64,7 +90,8 @@ font {
 			},
 			messages:{
 				"username":{
-					"required":"用户名不能为空"
+					"required":"用户名不能为空",
+					"isExistField":"用户名已存在"
 				},
 				"password":{
 					"required":"密码不能为空",
@@ -77,7 +104,8 @@ font {
 				},
 				"email":{
 					"required":"邮箱不能为空",
-					"email":"邮箱格式不正确"
+					"email":"邮箱格式不正确",
+					"isExistField":"邮箱已被注册"
 				},
 				"sex":{
 					"required":"请选择性别"
