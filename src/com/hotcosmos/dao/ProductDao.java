@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import com.hotcosmos.domain.Category;
 import com.hotcosmos.domain.Product;
 import com.hotcosmos.utils.DataSourceUtils;
 
@@ -35,6 +36,18 @@ public class ProductDao {
 		String sql = "select * from product order by pdate desc limit ?,?";
 		List<Product> newProductList = queryRunner.query(sql, new BeanListHandler<Product>(Product.class), 0, 9);
 		return newProductList;
+	}
+
+	/**
+	 * 获得分类信息
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Category> getcategoryList() throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from category";
+		List<Category> categoryList = queryRunner.query(sql, new BeanListHandler<Category>(Category.class));
+		return categoryList;
 	}
 
 }

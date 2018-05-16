@@ -44,4 +44,14 @@
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CategoryListServlet</display-name>
+    <servlet-name>CategoryListServlet</servlet-name>
+    <servlet-class>com.hotcosmos.web.servlet.CategoryListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryListServlet</servlet-name>
+    <url-pattern>/categoryList</url-pattern>
+  </servlet-mapping>
 </web-app>

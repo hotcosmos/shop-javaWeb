@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.hotcosmos.dao.ProductDao;
+import com.hotcosmos.domain.Category;
 import com.hotcosmos.domain.Product;
 
 public class ProductService {
@@ -34,6 +35,21 @@ public class ProductService {
 			e.printStackTrace();
 		}
 		return newProductList;
+	}
+	
+	/**
+	 * 获取商品分类信息
+	 * @return
+	 */
+	public List<Category> getCategoryList() {
+		ProductDao productDao = new ProductDao();
+		List<Category> categoryList = null;
+		try {
+			categoryList = productDao.getcategoryList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return categoryList;
 	}
 
 }

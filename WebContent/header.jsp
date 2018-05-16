@@ -35,11 +35,9 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="product_list.htm">手机数码<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">电脑办公</a></li>
+				<ul class="nav navbar-nav" id="categoryUl">
+					<!-- <li class="active"><a href="product_list.htm">手机数码<span class="sr-only">(current)</span></a></li> -->
+					
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
@@ -51,3 +49,20 @@
 		</div>
 	</nav>
 </div>
+<script>
+	//从数据库中动态获取商品分类信息
+	$(function(){
+		var context = "";
+		$.post(
+			"${pageContext.request.contextPath}/categoryList",
+			function(data){
+				for(var i = 0; i < data.length; i++){
+					context += "<li><a href='#'>"+ data[i].cname +"</a></li>";
+				}
+				//将其写入页面的对应ul中
+				$("#categoryUl").html(context);
+			},
+			"json"
+		);
+	});
+</script>
