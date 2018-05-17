@@ -100,5 +100,21 @@ public class ProductService {
 		pageBean.setList(list);
 		return pageBean;
 	}
+	
+	/**
+	 * 根据商品的pid在数据库中获取相关信息
+	 * @param pid
+	 * @return
+	 */
+	public Product getProductInfoByPid(String pid) {
+		ProductDao productDao = new ProductDao();
+		Product product = null;
+		try {
+			product = productDao.getProductInfoByPid(pid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return product;
+	}
 
 }

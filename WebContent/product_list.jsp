@@ -42,11 +42,11 @@ body {
 		
 		<c:forEach items="${pageBean.list }" var="Product">
 			<div class="col-md-2" style="height:250px;">
-				<a href="product_info.htm">
+				<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}">
 					<img src="${pageContext.request.contextPath }/${Product.pimage }" width="170" height="170" style="display: inline-block;">
 				</a>
 				<p>
-					<a href="product_info.html" style='color: green'>${Product.pname }</a>
+					<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}" style='color: green'>${Product.pname }</a>
 				</p>
 				<p>
 					<font color="#FF0000">商城价：&yen;${Product.shop_price }</font>

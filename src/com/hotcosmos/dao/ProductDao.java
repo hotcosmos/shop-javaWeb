@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -69,11 +70,32 @@ public class ProductDao {
 		return query.intValue();
 	}
 
+	/**
+	 * 根据分类获取商品信息并分页, 获取每页的商品列表
+	 * @param cid  商品分类
+	 * @param index  当前页的起始索引
+	 * @param currentCount  当前页的终止索引
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Product> getProductListByCategory(String cid, int index, int currentCount) throws SQLException {
 		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
 		String sql = "select * from product where cid=? limit ?,?";
 		List<Product> ProductList = queryRunner.query(sql, new BeanListHandler<Product>(Product.class), cid, index,currentCount);
 		return ProductList;
+	}
+
+	/**
+	 * 根据商品的pid在数据库中获取相关信息
+	 * @param pid
+	 * @return
+	 * @throws SQLException 
+	 */
+	public Product getProductInfoByPid(String pid) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product where pid=?";
+		Product product = queryRunner.query(sql, new BeanHandler<Product>(Product.class), pid);
+		return product;
 	}
 
 }
