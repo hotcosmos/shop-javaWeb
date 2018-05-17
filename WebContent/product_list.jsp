@@ -42,11 +42,11 @@ body {
 		
 		<c:forEach items="${pageBean.list }" var="Product">
 			<div class="col-md-2" style="height:250px;">
-				<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}">
+				<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}&cid=${cid }&currentPage=${pageBean.currentPage }">
 					<img src="${pageContext.request.contextPath }/${Product.pimage }" width="170" height="170" style="display: inline-block;">
 				</a>
 				<p>
-					<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}" style='color: green'>${Product.pname }</a>
+					<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}&cid=${cid }&currentPage=${pageBean.currentPage }" style='color: green'>${Product.pname }</a>
 				</p>
 				<p>
 					<font color="#FF0000">商城价：&yen;${Product.shop_price }</font>
@@ -109,9 +109,12 @@ body {
 		<div style="overflow: hidden;">
 
 			<ul style="list-style: none;">
-				<li
-					style="width: 150px; height: 216; float: left; margin: 0 8px 0 0; padding: 0 18px 15px; text-align: center;"><img
-					src="products/1/cs10001.jpg" width="130px" height="130px" /></li>
+				<c:forEach items="${productList }" var="product">
+					<li style="width: 150px; height: 216; float: left; margin: 0 8px 0 0; padding: 0 18px 15px; text-align: center;">
+						<img src="${pageContext.request.contextPath}/${product.pimage }" width="130px" height="130px" />
+					</li>
+				</c:forEach>
+				
 			</ul>
 
 		</div>
