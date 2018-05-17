@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.hotcosmos.domain.Category;
 import com.hotcosmos.domain.Product;
@@ -53,6 +54,26 @@ public class ProductDao {
 		String sql = "select * from category";
 		List<Category> categoryList = queryRunner.query(sql, new BeanListHandler<Category>(Category.class));
 		return categoryList;
+	}
+	
+	/**
+	 * 根据分类获取商品信息并分页，获取当前分类的相关商品总条数
+	 * @param cid
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getTotalCountProductListByCategory(String cid) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select count(*) from product where cid=?";
+		Long query = (Long) queryRunner.query(sql, new ScalarHandler(), cid);
+		return query.intValue();
+	}
+
+	public List<Product> getProductListByCategory(String cid, int index, int currentCount) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from product where cid=? limit ?,?";
+		List<Product> ProductList = queryRunner.query(sql, new BeanListHandler<Product>(Product.class), cid, index,currentCount);
+		return ProductList;
 	}
 
 }

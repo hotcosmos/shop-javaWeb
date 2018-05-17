@@ -54,4 +54,14 @@
     <servlet-name>CategoryListServlet</servlet-name>
     <url-pattern>/categoryList</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductListByCategoryServlet</display-name>
+    <servlet-name>ProductListByCategoryServlet</servlet-name>
+    <servlet-class>com.hotcosmos.web.servlet.ProductListByCategoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductListByCategoryServlet</servlet-name>
+    <url-pattern>/productListByCategory</url-pattern>
+  </servlet-mapping>
 </web-app>
