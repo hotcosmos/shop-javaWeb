@@ -2,6 +2,11 @@ package com.hotcosmos.domain;
 
 import java.util.Date;
 
+/**
+ * 商品表
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class Product {
 	// `pid` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
 	// `pname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,

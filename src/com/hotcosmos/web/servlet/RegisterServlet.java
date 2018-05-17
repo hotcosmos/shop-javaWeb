@@ -22,6 +22,11 @@ import com.hotcosmos.service.UserService;
 import com.hotcosmos.utils.CommonUtils;
 import com.hotcosmos.utils.MailUtils;
 
+/**
+ * 用户注册：封装数据，发送激活邮件
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class RegisterServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

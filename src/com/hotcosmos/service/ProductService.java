@@ -7,6 +7,11 @@ import com.hotcosmos.dao.ProductDao;
 import com.hotcosmos.domain.Category;
 import com.hotcosmos.domain.Product;
 
+/**
+ * 商品相关的业务逻辑
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class ProductService {
 	/**
 	 * 获取最热商品 9个

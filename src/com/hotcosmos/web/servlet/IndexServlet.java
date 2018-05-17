@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.hotcosmos.domain.Product;
 import com.hotcosmos.service.ProductService;
 
+/**
+ * 获取首页中动态获取的相关商品信息，显示在页面中
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class IndexServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

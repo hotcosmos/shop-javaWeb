@@ -16,6 +16,11 @@ import com.hotcosmos.utils.JedisPoolUtils;
 
 import redis.clients.jedis.Jedis;
 
+/**
+ * 从redis缓存或数据库中获取商品分类信息，将其显示在导航条中
+ * @author Administrator
+ * @date 2018年5月16日
+ */
 public class CategoryListServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

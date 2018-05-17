@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hotcosmos.service.UserService;
 
+/**
+ * 在用户注册时，检查用户名或邮箱是否已经存在
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class IsExistFieldServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

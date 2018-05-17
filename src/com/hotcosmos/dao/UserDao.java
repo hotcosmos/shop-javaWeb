@@ -8,6 +8,11 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import com.hotcosmos.domain.User;
 import com.hotcosmos.utils.DataSourceUtils;
 
+/**
+ * 用户相关的数据库操作
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class UserDao {
 	/**
 	 * 用户注册方法

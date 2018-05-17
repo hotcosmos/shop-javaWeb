@@ -10,6 +10,11 @@ import com.hotcosmos.domain.Category;
 import com.hotcosmos.domain.Product;
 import com.hotcosmos.utils.DataSourceUtils;
 
+/**
+ * 商品相关的数据库操作
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class ProductDao {
 
 	/**

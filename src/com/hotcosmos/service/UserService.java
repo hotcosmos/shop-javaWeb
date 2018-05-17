@@ -5,6 +5,11 @@ import java.sql.SQLException;
 import com.hotcosmos.dao.UserDao;
 import com.hotcosmos.domain.User;
 
+/**
+ * 用户相关的业务逻辑
+ * @author Administrator
+ * @date 2018年5月15日
+ */
 public class UserService {
 	/**
 	 * 这是用于用户注册的方法
