@@ -42,11 +42,11 @@ body {
 		
 		<c:forEach items="${pageBean.list }" var="Product">
 			<div class="col-md-2" style="height:250px;">
-				<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}&cid=${cid }&currentPage=${pageBean.currentPage }">
+				<a href="${pageContext.request.contextPath }/product?methodName=productInfo&pid=${Product.pid}&cid=${cid }&currentPage=${pageBean.currentPage }">
 					<img src="${pageContext.request.contextPath }/${Product.pimage }" width="170" height="170" style="display: inline-block;">
 				</a>
 				<p>
-					<a href="${pageContext.request.contextPath }/productInfo?pid=${Product.pid}&cid=${cid }&currentPage=${pageBean.currentPage }" style='color: green'>${Product.pname }</a>
+					<a href="${pageContext.request.contextPath }/product?methodName=productInfo&pid=${Product.pid}&cid=${cid }&currentPage=${pageBean.currentPage }" style='color: green'>${Product.pname }</a>
 				</p>
 				<p>
 					<font color="#FF0000">商城价：&yen;${Product.shop_price }</font>
@@ -73,7 +73,7 @@ body {
 				<li class="disabled"><a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 			</c:if>
 			<c:if test="${pageBean.currentPage - 1 != 0 }">
-				<li><a href="${pageContext.request.contextPath}/productListByCategory?cid=${cid}&currentPage=${pageBean.currentPage - 1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/product?methodName=productListByCategory&cid=${cid}&currentPage=${pageBean.currentPage - 1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 			</c:if>
 			<!-- 页码 -->
 			<c:forEach begin="1" end="${pageBean.totalPage }" var="page">
@@ -81,7 +81,7 @@ body {
 					<li class="active"><a href="javascript:void(0)">${page }</a></li>
 				</c:if>
 				<c:if test="${page != pageBean.currentPage }" >
-					<li><a href="${pageContext.request.contextPath}/productListByCategory?cid=${cid}&currentPage=${page}">${page }</a></li>
+					<li><a href="${pageContext.request.contextPath}/product?methodName=productListByCategory&cid=${cid}&currentPage=${page}">${page }</a></li>
 				</c:if>
 			</c:forEach>
 			<!-- 下一页 -->
@@ -89,7 +89,7 @@ body {
 				<li class="disabled"><a href="javascript:void(0)" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 			</c:if>
 			<c:if test="${pageBean.currentPage + 1 != pageBean.totalPage + 1 }">
-				<li><a href="${pageContext.request.contextPath}/productListByCategory?cid=${cid}&currentPage=${pageBean.currentPage + 1 }" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/product?methodName=productListByCategory&cid=${cid}&currentPage=${pageBean.currentPage + 1 }" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 			</c:if>
 			
 		</ul>

@@ -54,10 +54,10 @@
 	$(function(){
 		var context = "";
 		$.post(
-			"${pageContext.request.contextPath}/categoryList",
+			"${pageContext.request.contextPath}/product?methodName=categoryList",
 			function(data){
 				for(var i = 0; i < data.length; i++){
-					context += "<li><a href='${pageContext.request.contextPath}/productListByCategory?cid="+data[i].cid+"'>"+ data[i].cname +"</a></li>";
+					context += "<li><a href='${pageContext.request.contextPath}/product?methodName=productListByCategory&cid="+data[i].cid+"'>"+ data[i].cname +"</a></li>";
 				}
 				//将其写入页面的对应ul中
 				$("#categoryUl").html(context);
