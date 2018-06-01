@@ -31,8 +31,13 @@
 		</style>
 		<script type="text/javascript">
 			function deleteProductFromCart(pid){
-				if(confirm('您确认要删除此商品?')){
+				if(confirm('您是否要删除此商品?')){
 					location.href="${pageContext.request.contextPath }/product?methodName=deleteProductFromCart&pid="+pid;
+				}
+			}
+			function clearCart(){
+				if(confirm('您是否要删除购物车?')){
+					location.href="${pageContext.request.contextPath }/product?methodName=clearCart";
 				}
 			}
 		</script>
@@ -96,7 +101,7 @@
 				</em> 赠送积分: <em style="color:#ff6600;">${cart.total }</em>&nbsp; 商品金额: <strong style="color:#ff6600;">￥${cart.total }元</strong>
 					</div>
 					<div style="text-align:right;margin-top:10px;margin-bottom:10px;">
-						<a href="order_info.htm" id="clear" class="clear">清空购物车</a>
+						<a href="javascript:void(0);" onclick="clearCart()" id="clear" class="clear">清空购物车</a>
 						<a href="order_info.htm">
 							<input type="submit" width="100" value="提交订单" name="submit" border="0" style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 							height:35px;width:100px;color:white;">

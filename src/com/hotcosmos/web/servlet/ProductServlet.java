@@ -268,6 +268,23 @@ public class ProductServlet extends BaseServlet {
 		//重定向到购物车展示页面
 		response.sendRedirect(request.getContextPath() + "/cart.jsp");
 	}
+	
+	/**
+	 * 从session中删除购物车
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void clearCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取session
+		HttpSession session = request.getSession();
+		//从session中删除购物车
+		session.removeAttribute("cart");
+
+		//重定向到购物车展示页面
+		response.sendRedirect(request.getContextPath() + "/cart.jsp");
+	}
 }
 
 
