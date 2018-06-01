@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -238,6 +239,31 @@ public class ProductServlet extends BaseServlet {
 		
 		//重定向到购物车列表页
 		response.sendRedirect(request.getContextPath()+"/cart.jsp");
+	}
+	
+	/**
+	 * 根据商品id删除购物车中的单个商品
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void deleteProductFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取pid
+		String pid = request.getParameter("pid");
+		//获取session
+		HttpSession session = request.getSession();
+		Cart cart = (Cart)session.getAttribute("cart");
+		if(cart != null) {
+			//获取pid对应的购物项
+			Map<String, CartItem> cartItem = cart.getCartItem();
+			//从总价中删除当前pid对应购物项的小计
+			cart.setTotal(cart.getTotal() - cartItem.get(pid).getSubTotal());
+			//从购物车中删除pid对应的购物项
+			cartItem.remove(pid);
+		}
+		//将购物车加入到session中
+		session.setAttribute("cart", cart);
 	}
 }
 
