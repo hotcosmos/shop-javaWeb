@@ -10,8 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.hotcosmos.domain.Cart;
+import com.hotcosmos.domain.CartItem;
 import com.hotcosmos.domain.Category;
 import com.hotcosmos.domain.PageBean;
 import com.hotcosmos.domain.Product;
@@ -179,4 +182,76 @@ public class ProductServlet extends BaseServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		response.getWriter().write(shop_categoryListJson);
 	}
+	
+	/**
+	 * 将需要购买的商品信息添加到购物车中
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void addProductToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取需要添加到购物车中的商品id
+		String pid = request.getParameter("pid");
+		//获取需要添加到购物车中的商品数量
+		int buyNum = Integer.parseInt(request.getParameter("buyNum"));
+		if(buyNum <= 0) {
+			buyNum = 1;
+		}
+		
+		//根据pid获取商品信息
+		ProductService productService = new ProductService();
+		Product product = productService.getProductInfoByPid(pid);
+		//计算商品小计
+		double subTotal = buyNum * product.getShop_price();
+		//将商品信息,商品数量,商品小计封装到 购物车项 中
+		CartItem cartItem = new CartItem();
+		cartItem.setProduct(product);
+		cartItem.setBuyNum(buyNum);
+		cartItem.setSubTotal(subTotal);
+		
+		//获取session
+		HttpSession session = request.getSession();
+		Cart cart = (Cart)session.getAttribute("cart");
+		//判断在session中是否已经存在了cart
+		if(cart == null) {
+			cart = new Cart();
+		}
+		//判断在购物车中是否已经存在了该商品
+		if(cart.getCartItem().containsKey(pid)) {
+			//存在该商品，修改购物项中的商品数量和小计
+			int newBuyNum = cart.getCartItem().get(pid).getBuyNum() + buyNum;
+			double newSubTotal = cart.getCartItem().get(pid).getSubTotal() + subTotal;
+			//将新的商品数量和小计放入购物项中
+			cartItem.setBuyNum(newBuyNum);
+			cartItem.setSubTotal(newSubTotal);
+		}
+		//将pid和封装好的购物车项封装到购物车中
+		cart.getCartItem().put(pid, cartItem);
+		//计算购物车中商品价格总计
+		double total = cart.getTotal() + subTotal;
+		//将购物车商品总计封装到购物车中
+		cart.setTotal(total);
+		
+		//将购物车写入session域中
+		session.setAttribute("cart", cart);
+		
+		//重定向到购物车列表页
+		response.sendRedirect(request.getContextPath()+"/cart.jsp");
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
