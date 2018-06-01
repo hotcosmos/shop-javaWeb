@@ -264,6 +264,9 @@ public class ProductServlet extends BaseServlet {
 		}
 		//将购物车加入到session中
 		session.setAttribute("cart", cart);
+		
+		//重定向到购物车展示页面
+		response.sendRedirect(request.getContextPath() + "/cart.jsp");
 	}
 }
 
