@@ -11,6 +11,7 @@ import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -19,6 +20,7 @@ import org.apache.commons.beanutils.Converter;
 import com.hotcosmos.domain.User;
 import com.hotcosmos.service.UserService;
 import com.hotcosmos.utils.CommonUtils;
+import com.hotcosmos.utils.MD5Utils;
 import com.hotcosmos.utils.MailUtils;
 
 /**
@@ -65,6 +67,8 @@ public class UserServlet extends BaseServlet {
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		//对密码进行加密
+		user.setPassword(MD5Utils.md5(user.getPassword()));
 		// private String uid;
 		user.setUid(CommonUtils.getUUID());
 		// private String telephone;
@@ -151,4 +155,73 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().write(json);
 		}
 	}
+	
+	/**
+	 * 用户登录
+	 * @param request
+	 * @param response
+	 */
+	public void login(HttpServletRequest request, HttpServletResponse response) {
+		//获取用户名和密码
+		String username = request.getParameter("username");
+		String password = MD5Utils.md5(request.getParameter("password"));
+		
+		if(username == null || password == null) {
+			return;
+		}
+		//将用户名和密码传送到service层判断用户名和密码是否存在
+		UserService userService = new UserService();
+		User user =  userService.login(username,password);
+		if(user != null) {
+			//将用户信息存储到session中
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			//跳转到首页
+			try {
+				response.sendRedirect(request.getContextPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			//登录失败，给出提示信息
+			request.setAttribute("errorInfo", "用户名或密码不正确");
+			try {
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+			}
+		}	
+	}
+	
+	/**
+	 * 用户退出
+	 * @param request
+	 * @param response
+	 */
+	public void quit(HttpServletRequest request, HttpServletResponse response) {
+		//从session中删除user
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			return;
+		}
+		session.removeAttribute("user");
+		//跳转到登录页
+		try {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

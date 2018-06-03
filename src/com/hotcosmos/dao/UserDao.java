@@ -3,6 +3,7 @@ package com.hotcosmos.dao;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.hotcosmos.domain.User;
@@ -61,6 +62,20 @@ public class UserDao {
 		}
 		Long query =(Long) queryRunner.query(sql,new ScalarHandler(),isExistValue);
 		return query;
+	}
+	
+	/**
+	 * 用户登录，判断用户名和密码是否存在
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws SQLException 
+	 */
+	public User login(String username, String password) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from user where username=? and password=?";
+		User user = queryRunner.query(sql, new BeanHandler<User>(User.class), username,password);
+		return user;
 	}
 
 }

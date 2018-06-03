@@ -44,7 +44,7 @@ font {
 			var flag = true;
 			$.ajax({
 				"async":false,
-				"url":"${pageContext.request.contextPath}/isExistField",
+				"url":"${pageContext.request.contextPath}/user?methodName=isExistField",
 				"data":{"isExistField":params,"isExistValue":value},
 				"type":"POST",
 				"dataType":"json",
