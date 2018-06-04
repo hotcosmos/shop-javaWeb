@@ -48,5 +48,45 @@ public class OrderService {
 		
 		return row1>0 && row2>0 ? true:false;
 	}
+	
+	/**
+	 * 确认订单----1.更新收货人信息，
+	 * @param order
+	 * @return
+	 */
+	public boolean updateOrder(Order order) {
+		OrderDao orderDao = new OrderDao();
+		int row = 0;
+		try {
+			row = orderDao.updateOrder(order);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return row>0?true:false;
+	}
+
+	/**
+	 * 修改order表中 订单的支付状态
+	 * @param r6_Order
+	 */
+	public void updateOrderState(String r6_Order) {
+		OrderDao orderDao = new OrderDao();
+		try {
+			orderDao.updateOrderState(r6_Order);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+

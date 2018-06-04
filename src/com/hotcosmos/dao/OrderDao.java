@@ -35,4 +35,35 @@ public class OrderDao {
 		return rows>0?1:0;
 	}
 
+	/**
+	 * 确认订单----1.更新收货人信息，
+	 * @param order
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int updateOrder(Order order) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "update orders set address=?,name=?,telephone=? where oid=?";
+		int row =  queryRunner.update(sql, order.getAddress(),order.getName(),order.getTelephone(),order.getOid());
+		return row;
+	}
+
+	/**
+	 * 修改order表中 订单的支付状态
+	 * @param r6_Order
+	 * @throws SQLException 
+	 */
+	public void updateOrderState(String r6_Order) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "update orders set state=1 where oid=?";
+		queryRunner.update(sql,r6_Order);
+	}
 }
+
+
+
+
+
+
+
+

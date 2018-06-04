@@ -32,6 +32,12 @@ body {
 		<div class="row">
 			<div style="margin: 0 auto; margin-top: 10px; width: 950px;">
 				<strong>订单详情</strong>
+				<c:if test="${errorInfo == null }">
+					<div>&nbsp;</div>
+				</c:if>
+				<c:if test="${errorInfo != null }">
+					<div style="color:#aa2222;">${errorInfo }</div>
+				</c:if>
 				<table class="table table-bordered">
 					<tbody>
 						<tr class="warning">
@@ -72,7 +78,7 @@ body {
 				<input type="hidden" name="oid" value="${order.oid }" >
 				
 				<div class="form-group">
-					<label for="username" class="col-sm-1 control-label">地址</label>
+					<label for="address" class="col-sm-1 control-label">地址</label>
 					<div class="col-sm-5">
 						<input type="text" class="form-control" id="address" name="address" placeholder="请输入收货地址">
 					</div>
@@ -80,13 +86,13 @@ body {
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-1 control-label">收货人</label>
 					<div class="col-sm-5">
-						<input type="password" class="form-control" id="inputPassword3" name="name" value="${user.name }" placeholder="请输收货人">
+						<input type="text" class="form-control" id="inputPassword3" name="name" value="${user.name }" placeholder="请输收货人">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="confirmpwd" class="col-sm-1 control-label">电话</label>
 					<div class="col-sm-5">
-						<input type="password" class="form-control" id="confirmpwd" name="telephone" value="${user.telephone }" placeholder="请输入联系方式">
+						<input type="text" class="form-control" id="confirmpwd" name="telephone" value="${user.telephone }" placeholder="请输入联系方式">
 					</div>
 				</div>
 
