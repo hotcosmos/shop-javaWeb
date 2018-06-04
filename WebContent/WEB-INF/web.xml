@@ -34,4 +34,14 @@
     <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/BaseServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OrderServlet</display-name>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>com.hotcosmos.web.servlet.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/order</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -51,7 +51,7 @@ public class UserServlet extends BaseServlet {
 			// 定义一个类型转换器（BeanUtils中的ConvertUtils），将birthday的String类型转为Date类型
 			ConvertUtils.register(new Converter() {
 				@Override
-				public Object convert(@SuppressWarnings("rawtypes") Class clazz, Object value) {
+				public Object convert( Class clazz, Object value) {
 					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 					Date parse = null;
 					try {
@@ -72,7 +72,7 @@ public class UserServlet extends BaseServlet {
 		// private String uid;
 		user.setUid(CommonUtils.getUUID());
 		// private String telephone;
-		user.setBirthday(null);
+		user.setTelephone(null);
 		// private String state;
 		user.setState(0);
 		// private String code;
