@@ -21,6 +21,7 @@ import com.hotcosmos.domain.Cart;
 import com.hotcosmos.domain.CartItem;
 import com.hotcosmos.domain.Order;
 import com.hotcosmos.domain.OrderItem;
+import com.hotcosmos.domain.Product;
 import com.hotcosmos.domain.User;
 import com.hotcosmos.service.OrderService;
 import com.hotcosmos.utils.CommonUtils;
@@ -191,6 +192,54 @@ public class OrderServlet extends BaseServlet {
 
 		// 重定向到第三方支付平台
 		response.sendRedirect(url);
+	}
+	
+	/**
+	 * 显示我的订单列表
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void orderList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1. 判断用户是否登录
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		if(user == null) {
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			return;
+		}
+		
+		// 2. 获取用户的全部订单列表
+		OrderService orderService = new OrderService();
+		List<Order> orderList = orderService.getOrderListByUid(user.getUid());
+		if(orderList != null) {
+			// 3. 获取订单中的订单项和商品信息
+			for(Order order : orderList) {
+				List<Map<String,Object>> mapList = orderService.getOrderItemMapListByOid(order.getOid());
+				//封装获取到的数据到Product和OrderItem实体中
+				for(Map<String,Object> map : mapList) {
+					try {
+						// (1) 封装数据到OrderItem实体中
+						OrderItem orderItem = new OrderItem();
+						BeanUtils.populate(orderItem, map);
+						// (2) 封装数据到Product实体中
+						Product product = new Product();
+						BeanUtils.populate(product, map);
+						// (3) 将product添加到orderItem中
+						orderItem.setProduct(product);
+						// (4) 将orderItem添加到order中
+						order.getOrderItem().add(orderItem);
+					} catch (IllegalAccessException | InvocationTargetException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		//转发数据到页面中
+		request.setAttribute("orderList", orderList);
+		request.getRequestDispatcher("/order_list.jsp").forward(request, response);
 	}
 }
 

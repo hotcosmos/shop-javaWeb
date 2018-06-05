@@ -3,8 +3,11 @@ package com.hotcosmos.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import com.hotcosmos.domain.Order;
 import com.hotcosmos.domain.OrderItem;
@@ -57,6 +60,30 @@ public class OrderDao {
 		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
 		String sql = "update orders set state=1 where oid=?";
 		queryRunner.update(sql,r6_Order);
+	}
+
+	/**
+	 * 获取用户的全部订单列表
+	 * @param uid
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Order> getOrderListByUid(String uid) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql="select * from orders where uid=?";
+		return queryRunner.query(sql, new BeanListHandler<Order>(Order.class), uid);
+	}
+
+	/**
+	 * 获取订单中的订单项和商品信息
+	 * @param oid
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Map<String, Object>> getOrderItemMapListByOid(String oid) throws SQLException {
+		QueryRunner queryRunner = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "select * from orderitem i,product p where i.pid=p.pid and i.oid=?";
+		return queryRunner.query(sql, new MapListHandler(), oid);
 	}
 }
 

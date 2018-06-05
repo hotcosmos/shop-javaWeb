@@ -1,6 +1,8 @@
 package com.hotcosmos.service;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import com.hotcosmos.dao.OrderDao;
 import com.hotcosmos.domain.Order;
@@ -76,6 +78,39 @@ public class OrderService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 获取用户的全部订单列表
+	 * @param uid
+	 * @return
+	 */
+	public List<Order> getOrderListByUid(String uid) {
+		OrderDao orderDao = new OrderDao();
+		List<Order> orderList = null;
+		try {
+			orderList = orderDao.getOrderListByUid(uid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderList;
+	}
+
+	/**
+	 * 获取订单中的订单项和商品信息
+	 * @param oid
+	 * @return
+	 */
+	public List<Map<String, Object>> getOrderItemMapListByOid(String oid) {
+		OrderDao orderDao = new OrderDao();
+		List<Map<String, Object>> mapList = null;
+		try {
+			mapList = orderDao.getOrderItemMapListByOid(oid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mapList;
 	}
 
 }
